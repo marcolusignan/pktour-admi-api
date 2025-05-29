@@ -1,49 +1,103 @@
-# pktouradmin
+# 🃏 PKTourAdmin API
 
-This project was created using the [Ktor Project Generator](https://start.ktor.io).
+**PKTourAdmin** is a Kotlin-based REST API tailored for managing poker tournaments with precision and ease.
 
-Here are some useful links to get you started:
+---
 
-- [Ktor Documentation](https://ktor.io/docs/home.html)
-- [Ktor GitHub page](https://github.com/ktorio/ktor)
-- The [Ktor Slack chat](https://app.slack.com/client/T09229ZC6/C0A974TJ9). You'll need to [request an invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) to join.
+## 🚀 Features
 
-## Features
+### 🛠️ Functional Highlights
 
-Here's a list of features included in this project:
+* 🎯 Create a player
+* 🔄 Update a player's score
+* 🔍 Retrieve player data by ID
+* 🏆 List all players ordered by **dense ranking**
+* 🧹 Delete all players
 
-| Name                                                                   | Description                                                                        |
-| ------------------------------------------------------------------------|------------------------------------------------------------------------------------ |
-| [Routing](https://start.ktor.io/p/routing)                             | Provides a structured routing DSL                                                  |
-| [kotlinx.serialization](https://start.ktor.io/p/kotlinx-serialization) | Handles JSON serialization using kotlinx.serialization library                     |
-| [Content Negotiation](https://start.ktor.io/p/content-negotiation)     | Provides automatic content conversion according to Content-Type and Accept headers |
-| [MongoDB](https://start.ktor.io/p/mongodb)                             | Adds MongoDB database to your application                                          |
-| [Koin](https://start.ktor.io/p/koin)                                   | Provides dependency injection                                                      |
-| [Call Logging](https://start.ktor.io/p/call-logging)                   | Logs client requests                                                               |
-| [Static Content](https://start.ktor.io/p/static-content)               | Serves static files from defined locations                                         |
-| [Authentication](https://start.ktor.io/p/auth)                         | Provides extension point for handling the Authorization header                     |
-| [Authentication JWT](https://start.ktor.io/p/auth-jwt)                 | Handles JSON Web Token (JWT) bearer authentication scheme                          |
-| [OpenAPI](https://start.ktor.io/p/openapi)                             | Serves OpenAPI documentation                                                       |
-| [CORS](https://start.ktor.io/p/cors)                                   | Enables Cross-Origin Resource Sharing (CORS)                                       |
+### ⚙️ Technical Highlights
 
-## Building & Running
+* Built with [**Ktor**](https://ktor.io/docs), a powerful Kotlin framework for building asynchronous applications
+* 🔐 Implements **Basic Authentication** for secure access
+* 🐳 **Docker-ready** for seamless deployment
+* 📘 Offers **OpenAPI documentation** at the `/openapi` endpoint
+* 🧪 Comprehensive **integration testing** with Ktor's test client
 
-To build or run the project, use one of the following tasks:
+---
 
-| Task                          | Description                                                          |
-| -------------------------------|---------------------------------------------------------------------- |
-| `./gradlew test`              | Run the tests                                                        |
-| `./gradlew build`             | Build everything                                                     |
-| `buildFatJar`                 | Build an executable JAR of the server with all dependencies included |
-| `buildImage`                  | Build the docker image to use with the fat JAR                       |
-| `publishImageToLocalRegistry` | Publish the docker image locally                                     |
-| `run`                         | Run the server                                                       |
-| `runDocker`                   | Run using the local docker image                                     |
+## 📋 Prerequisites
 
-If the server starts successfully, you'll see the following output:
+Make sure the following tools are installed before running the application:
 
+* **JDK 22**
+* **Docker** (optional, for containerized setup)
+* An active **MongoDB** instance
+
+---
+
+## 🏃 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/marcolusignan/pktour-admi-api
+cd pktouradmin
 ```
-2024-12-04 14:32:45.584 [main] INFO  Application - Application started in 0.303 seconds.
-2024-12-04 14:32:45.682 [main] INFO  Application - Responding at http://0.0.0.0:8080
+
+### 2. Set up environment variables
+
+Export environment variables directly or create a `.env` file based on `.env.template` at the project root:
+
+```bash
+export API_LOGIN=...
+export API_PWD=...
+export MONGO_USER=...
+export MONGO_PWD=...
 ```
+
+### 3. Run the application
+
+To start the application (use `--docker` for Docker deployment):
+
+```bash
+./start.sh
+```
+
+### 4. Launch a local Docker database (optional)
+
+```bash
+./start-dev-db.sh
+```
+
+### 5. Stop Docker services
+
+```bash
+./stop-docker.sh
+```
+
+---
+
+## 🧪 Running Integration Tests
+
+### 1. Execute tests
+
+```bash
+./gradlew test
+```
+
+### 2. Use Docker for the test database (optional)
+
+```bash
+# Start test DB
+./start-test-db.sh
+
+# Stop test DB
+./stop-test-db.sh
+```
+
+---
+
+## 📎 Notes
+
+* The OpenAPI spec is available at: `http://localhost:<port>/openapi`
+* Default port and credentials can be configured via environment variables
 

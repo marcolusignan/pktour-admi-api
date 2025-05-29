@@ -1,0 +1,57 @@
+services:
+  api:
+    profiles: ["dev"]
+    build: .
+    ports:
+      - "8095:8095"
+    environment:
+      MONGO_USER: ${MONGO_USER}
+      MONGO_PWD: ${MONGO_PWD}
+      API_LOGIN: ${API_LOGIN}
+      API_PWD: ${API_PWD}
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    profiles: ["dev"]
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PWD}
+    volumes:
+      - mongo_data:/data/db:rw
+    ports:
+      - "27018:27017/tcp"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "500k"
+        max-file: "10"
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  test-database:
+    profiles: ["test"]
+    container_name: test-database
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: pktouradmin
+      MONGO_INITDB_ROOT_PASSWORD: pwd
+    volumes:
+      - mongo_data:/data/db:rw
+    ports:
+      - "27019:27017/tcp"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "500k"
+        max-file: "10"
+
+volumes:
+  mongo_data:

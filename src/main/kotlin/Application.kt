@@ -6,14 +6,14 @@ import com.mlg.plugin.configureDependencyInjection
 import com.mlg.plugin.configureHTTP
 import com.mlg.plugin.configureRequestLogging
 import com.mlg.plugin.configureRequestValidation
-import com.mlg.plugin.configureSecurity
+import com.mlg.plugin.configureAuthentication
 import io.ktor.server.application.*
 
 
 /**
  * Entry point for the Ktor application using Netty.
  *
- * Delegates to Ktor's [EngineMain] to launch the server.
+ * Delegates to Ktor's [io.ktor.server.netty.EngineMain] to launch the server.
  *
  * @param args Command-line arguments passed to the application.
  */
@@ -42,7 +42,7 @@ fun Application.module() {
     configureErrorHandlers()
     configureDependencyInjection()
     configureRequestLogging()
-    configureSecurity()
+    configureAuthentication()
     configureHTTP()
     configureRouting()
 }
